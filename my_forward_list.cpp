@@ -9,7 +9,7 @@ private:
 	{
 		private:
 			int data;
-			Node *next;
+			my_forward_list::Node *next;
 			Node(int data)
 			{
 				this->data=data;
@@ -18,13 +18,13 @@ private:
 			friend class my_forward_list;
 			//friend class iterator;    //friend class iterator;
 	};
-	Node *top;
+	my_forward_list::Node *top;
 public:
 	class iterator
 	{
 		private:
-			Node *ptr;
-			iterator(Node *ptr)
+			my_forward_list::Node *ptr;
+			iterator(my_forward_list::Node *ptr)
 			{
 				this->ptr=ptr;
 			}
@@ -51,7 +51,7 @@ public:
 				if(!this->ptr) return;
 				this->ptr=this->ptr->next;
 			}
-			int operator!=(iterator other)
+			int operator!=(my_forward_list::iterator other)
 			{	
 				/* if(this->ptr != other.ptr) return 1;
 				else return 0; */
@@ -65,13 +65,13 @@ public:                              // I have written it 2 types but dont worry
 	}
 	void insert(int data)
 	{
-		Node *t;
+		my_forward_list::Node *t;
 		t=new Node(data);
 		if(t==NULL) return; //Memory Allocation fail.
 		t->next=this->top;
 		this->top=t;
 	}
-	iterator begin()
+	my_forward_list::iterator begin()
 	{
 		// iterator tmp(this->top);
 		// return tmp;
@@ -79,13 +79,13 @@ public:                              // I have written it 2 types but dont worry
 		/* Below I have not called a constructor because we know we can't explicitly call a constructor, it gets called implicitly upon object creation.
 		   So in the backgound, similar to above 2 lines, an anonymous abject is created and it will be returned. "Anonymous means jiska koi naam na ho."  	
 		*/
-		return iterator(this->top);       
+		return my_forward_list::iterator(this->top);       
 	}
-	iterator end()
+	my_forward_list::iterator end()
 	{
 		// Here also we are not explicitly calling anything, actually an anonymous object will be created and for that object default constructor is called
 		// and value for its ptr will be assigned NULL and that anonymous object is returned here.	
-		return iterator(); 
+		return my_forward_list::iterator(); 
 	}
 
 };
