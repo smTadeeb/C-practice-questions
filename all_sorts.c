@@ -3,7 +3,7 @@ void linear_sort(int *, int);
 void see_array(int *,int);
 void bubble_sort(int *,int);
 void selection_sort(int *,int);
-
+void insertion_sort();
 int main()
 {
 int x[6] = {10,55,12,1,32,11};
@@ -135,4 +135,8 @@ iep++;
 *sm=*buffer;
 ba++;
 }
+}
+
+void insertion_sort()
+{
 }
