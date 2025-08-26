@@ -144,6 +144,7 @@ ba++;
 }
 }
 
+
 void insertion_sort(int *ba, int length)
 {
 int *oep, *iep, *dimag, *bac;
@@ -171,3 +172,24 @@ iep = ba-1;
 	dimag++;
 	}
 }
+
+
+/* //Above Insertion sort just implemented with for loop
+void insertion_sort(int *ba, int length)
+{
+int *oep, *iep, *dimag, *bac;
+int dimag_save;
+	for(dimag = ba+1, oep = ba+length, iep = ba-1;  dimag!=oep; dimag++)
+	{
+		for(dimag_save=*dimag, bac = dimag-1; bac != iep; *(bac+1)=*bac, bac--)
+		{
+			if(*bac<= dimag_save)
+			{
+				*(bac+1)= dimag_save;
+				break;
+			}
+		}
+		if(bac == iep)  *(bac+1)= dimag_save;
+	}
+}
+*/
