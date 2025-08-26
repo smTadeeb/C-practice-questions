@@ -1,4 +1,4 @@
-/* Linear Sort*/
+/* Linear Sort without pointers*/
 #include<stdio.h>
 int main()
 {

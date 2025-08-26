@@ -1,4 +1,4 @@
-/* Bubble Sort*/
+/* Bubble Sort without pointers*/
 #include<stdio.h>
 int main()
 {
