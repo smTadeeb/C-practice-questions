@@ -3,7 +3,8 @@ void linear_sort(int *, int);
 void see_array(int *,int);
 void bubble_sort(int *,int);
 void selection_sort(int *,int);
-void insertion_sort();
+void insertion_sort(int *,int);
+
 int main()
 {
 int x[6] = {10,55,12,1,32,11};
@@ -20,8 +21,9 @@ printf("\n1. Bring Array to Unsorted State");
 printf("\n2. Linear Sort using pointers");
 printf("\n3. Bubble Sort using pointers");
 printf("\n4. Selection Sort using pointers");
-printf("\n5. See Array");
-printf("\n6. Exit\n\n");
+printf("\n5. Insertion Sort using pointers");
+printf("\n6. See Array");
+printf("\n7. Exit\n\n");
 
 printf("Enter your choice: ");
 scanf("%d", &ch);
@@ -49,9 +51,14 @@ selection_sort(x,length);
 }
 else if(ch==5)
 {
-see_array(x,length);
+printf("\n____Array got Insertion Sorted___\n");
+insertion_sort(x,length);
 }
 else if(ch==6)
+{
+see_array(x,length);
+}
+else if(ch==7)
 {
 break;
 }
@@ -137,6 +144,30 @@ ba++;
 }
 }
 
-void insertion_sort()
+void insertion_sort(int *ba, int length)
 {
+int *oep, *iep, *dimag, *bac;
+int dimag_save;
+dimag = ba+1;
+oep = ba+length;
+iep = ba-1;
+	while(dimag!=oep)
+	{
+
+		dimag_save=*dimag;
+		bac = dimag-1;
+		while(bac != iep)
+		{
+			if(*bac<= dimag_save)
+			{
+				*(bac+1)= dimag_save;
+				break;
+			}
+			*(bac+1)=*bac;
+			bac--;
+		}
+	if(bac == iep)  *(bac+1)= dimag_save;
+	//printf("\nDimag mai saved nos is: \n%d", dimag_save);
+	dimag++;
+	}
 }
