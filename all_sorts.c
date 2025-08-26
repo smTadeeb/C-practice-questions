@@ -7,14 +7,25 @@ void insertion_sort(int *,int);
 
 int main()
 {
-int x[6] = {10,55,12,1,32,11};
+
+int x[6];
+
 int x_copy[6];
 int length, ch;
 length=6;
+
+for(int i=0;i<length;i++)
+{
+printf("\nEnter the %d index number: ",i);
+scanf("%d", &x[i]);
+}
+
 for(int i=0;i<length;i++)
 {
 x_copy[i] = x[i];
 }
+
+
 while(1)
 {
 printf("\n1. Bring Array to Unsorted State");
