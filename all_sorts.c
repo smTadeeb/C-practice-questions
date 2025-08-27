@@ -6,6 +6,9 @@ void selection_sort(int *,int);
 void insertion_sort(int *,int);
 void quick_sort(int *,int,int);
 int find_partition_point(int *, int , int );
+void quick_sort_without_reccursion(int *, int, int);
+void push(int lb, int ub);
+void pop();
 
 
 int main()
@@ -34,9 +37,10 @@ printf("\n2. Linear Sort using pointers");
 printf("\n3. Bubble Sort using pointers");
 printf("\n4. Selection Sort using pointers");
 printf("\n5. Insertion Sort using pointers");
-printf("\n6. Quick Sort using pointers");
-printf("\n7. See Array");
-printf("\n8. Exit\n\n");
+printf("\n6. Quick Sort [using reccurssion technique] using pointers");
+printf("\n7. Quick Sort [without reccurssion] using pointers");
+printf("\n8. See Array");
+printf("\n9. Exit\n\n");
 
 printf("Enter your choice: ");
 scanf("%d", &ch);
@@ -69,14 +73,19 @@ insertion_sort(x,length);
 }
 else if(ch==6)
 {
-printf("\n____Array got Quick Sorted___\n\n");
+printf("\n____Array got Quick Sorted [With Reccurrsion]___\n\n");
 quick_sort(x,0,length-1);
 }
 else if(ch==7)
 {
-see_array(x,length);
+printf("\n____Array got Quick Sorted [Without Reccurrsion]___\n\n");
+quick_sort_without_reccursion(x,0,length-1);
 }
 else if(ch==8)
+{
+see_array(x,length);
+}
+else if(ch==9)
 {
 break;
 }
@@ -244,3 +253,40 @@ partition_point = find_partition_point(ba,lb,ub);
 quick_sort(ba,lb,partition_point-1);
 quick_sort(ba,partition_point+1,ub);
 }
+
+
+int stack_lb[10];
+int stack_ub[10];
+int top=10;
+int lower_b,upper_b;
+
+void quick_sort_without_reccursion(int *ba, int lb, int ub)
+{
+int pp;
+push(lb,ub);
+while(top!=10)
+{
+pop();
+if(lower_b>=upper_b) continue;
+pp = find_partition_point(ba,lower_b,upper_b);
+push(lower_b, pp-1);
+push(pp+1,upper_b);
+}
+}
+
+void push(int lb, int ub)
+{
+stack_lb[top-1] = lb;
+stack_ub[top-1] = ub;
+top--;
+}
+
+void pop()
+{
+lower_b=stack_lb[top] ;
+upper_b=stack_ub[top];
+top++;
+}
+
+
+
