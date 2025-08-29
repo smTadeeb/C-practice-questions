@@ -46,6 +46,7 @@ while(*p== ' ') p--;
 *(p+1) = '\0';  
 }
 
+
 void mid_trim(char *p)
 {
 int count=0;
@@ -70,7 +71,7 @@ while(*r == ' ') r++;
 while(*r != ' ' && *r!='\0')   // previously while((*r != ' ' || *r != '\0') && *r!='\0') 
 {
 *q=*r; 
-*r = ' ';  //(i think its not neccesary)
+*r = ' ';  
 q++;
 r++;
 }
@@ -83,3 +84,5 @@ count=0;
 }
 
 }
+
+
