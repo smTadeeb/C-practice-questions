@@ -18,7 +18,8 @@ void bst_postorder_traversal_no_reccursion();
 void push(struct bst_node *);
 struct bst_node * pop();
 int isEmpty();
-
+void bst_clear();
+void __bst_clear(struct bst_node *);
 
 struct bst_node
 {
@@ -242,6 +243,26 @@ void bst_postorder_traversal_no_reccursion()
 {
 }
 
+void bst_clear()
+{
+if(!bst_root) 
+{
+printf("\n\nAlready there is no data, Nothing to Clearup \n\n");
+return;
+}
+__bst_clear(bst_root);
+bst_root=NULL;
+printf("\n\nWhole Tree is Successfully Deleted/Cleared\n\n");
+}
+
+void __bst_clear(struct bst_node *t)
+{
+if(t==NULL) return;
+__bst_clear(t->left);
+__bst_clear(t->right);
+free(t);
+}
+
 int main()
 {
 int ch , num;
@@ -257,7 +278,8 @@ printf("\n5. Postorder traversal with Reccursion");
 printf("\n6. Inorder traversal without Reccursion");
 printf("\n7. Preorder traversal without Reccursion");
 printf("\n8. Postorder traversal without Reccursion");
-printf("\n9. Exit");
+printf("\n9. Clear the Tree");
+printf("\n10. Exit");
 
 printf("\nEnter your choice: ");
 scanf("%d", &ch);
@@ -320,6 +342,10 @@ bst_postorder_traversal_no_reccursion();
 printf("\n\n");
 }
 else if(ch==9)
+{
+bst_clear();
+}
+else if(ch==10)
 {
 break;
 }
