@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 struct bst_node;
+struct stack_node;
 
 void add_to_bst(int );
 void remove_from_bst(int );
@@ -10,6 +12,13 @@ void __bst_postorder_traversal(struct bst_node *);
 void bst_inorder_traversal();
 void bst_preorder_traversal();
 void bst_postorder_traversal();
+void bst_inorder_traversal_no_reccursion();
+void bst_preorder_traversal_no_reccursion();
+void bst_postorder_traversal_no_reccursion();
+void push(struct bst_node *);
+struct bst_node * pop();
+int isEmpty();
+
 
 struct bst_node
 {
@@ -19,6 +28,13 @@ struct bst_node *left, *right;
 
 struct bst_node *bst_root;
 
+struct stack_node
+{
+struct bst_node *addr;
+struct stack_node *next;
+};
+
+struct stack_node *stack_top;
 
 void add_to_bst(int num)
 {
@@ -96,7 +112,7 @@ void bst_inorder_traversal()
 {
 if(!bst_root)
 {
-printf("\n\nNo data found !\n\n");
+printf("\n\nNo data found in BST !\n\n");
 return;
 }
 printf("\nInorder Traversal with recursion: ");
@@ -118,7 +134,7 @@ void bst_preorder_traversal()
 {
 if(!bst_root)
 {
-printf("\n\nNo data found !\n\n");
+printf("\n\nNo data found in BST ! \n\n");
 return;
 }
 printf("\nPreorder Traversal with recursion: ");
@@ -140,7 +156,7 @@ void bst_postorder_traversal()
 {
 if(!bst_root)
 {
-printf("\n\nNo data found !\n\n");
+printf("\n\nNo data found in BST ! \n\n");
 return;
 }
 printf("\nPostorder Traversal with recursion: ");
@@ -158,10 +174,70 @@ __bst_postorder_traversal(t->right);
 printf("%d ", t->num);
 }
 
+void bst_inorder_traversal_no_reccursion()
+{
+struct bst_node *t, *j;
+t=bst_root;
+while(t)
+{
+push(t);
+t=t->left;
+}
+
+while(!isEmpty())
+{
+t = pop();
+printf("%d ", t->num);
+j=t->right;
+if(j)
+{
+push(j);
+j=j->left;
+}
+}
+
+}
+
+void push(struct bst_node *addr)
+{
+struct stack_node *j;
+j= (struct stack_node *)malloc(sizeof(struct stack_node));
+j->addr = addr;
+j->next = stack_top;
+stack_top=j;
+}
+
+struct bst_node * pop()
+{
+struct stack_node *t;
+struct bst_node *addr;
+if(!stack_top) return NULL ;
+t=stack_top;
+stack_top = stack_top->next;
+addr = t->addr;  
+free(t);
+return addr;
+}
+
+int isEmpty()
+{
+return stack_top==NULL;
+}
+
+
+void bst_preorder_traversal_no_reccursion()
+{
+}
+
+void bst_postorder_traversal_no_reccursion()
+{
+}
+
 int main()
 {
 int ch , num;
 bst_root = NULL;
+stack_top = NULL;
 while(1)
 {
 printf("\n1. Add Node/data");
@@ -200,6 +276,39 @@ bst_preorder_traversal();
 else if(ch==5)
 {
 bst_postorder_traversal();
+}
+else if(ch==6)
+{
+if(!bst_root) 
+{
+printf("\n\nNo Data found in the BST\n\n");
+continue;
+}
+printf("\nInorder Traversal without reccursion is: \n");
+bst_inorder_traversal_no_reccursion();
+printf("\n\n");
+}
+else if(ch==7)
+{
+if(!bst_root) 
+{
+printf("\n\nNo Data found in the BST\n\n");
+continue;
+}
+printf("\nPreorder Traversal without reccursion is: \n");
+bst_preorder_traversal_no_reccursion();
+printf("\n\n");
+}
+else if(ch==8)
+{
+if(!bst_root) 
+{
+printf("\n\nNo Data found in the BST\n\n");
+continue;
+}
+printf("\nPostorder Traversal without reccursion is: \n");
+bst_postorder_traversal_no_reccursion();
+printf("\n\n");
 }
 else if(ch==9)
 {
