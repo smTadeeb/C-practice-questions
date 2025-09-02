@@ -1,5 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
+struct bst_node;
+
+void add_to_bst(int );
+void remove_from_bst(int );
+void __bst_inorder_traversal(struct bst_node *);
+void __bst_preorder_traversal(struct bst_node *);
+void __bst_postorder_traversal(struct bst_node *);
+void bst_inorder_traversal();
+void bst_preorder_traversal();
+void bst_postorder_traversal();
 
 struct bst_node
 {
@@ -25,30 +35,37 @@ if(num < t->num)
 {
 t=t->left;
 }
-if(num > t->num)
+else
 {
 t=t->right;
 }
 }
 
-t= (struct bst_node*)malloc(sizeof(struct bst_node));
+t=(struct bst_node*)malloc(sizeof(struct bst_node));
 t->num=num;
 t->left=NULL;
 t->right=NULL;
 
+if(!bst_root)
+{
+bst_root = t;
+}
+else
+{
 j=bst_root;
-while(j)
+while(1)
 {
 
 	if(t->num < j->num)
 	{
 		if(j->left)
 		{
-		j=j->left;
+		 j=j->left;
 		}
 		else
 		{
-		j->left=t;
+		 j->left=t;
+		 break;
 		}
 	}
 
@@ -56,13 +73,15 @@ while(j)
 	{
 		if(j->right)
 		{
-		j=j->right;
+		 j=j->right;
 		}
 		else
 		{
-		j->right = t;
+		 j->right = t;
+		 break;
 		}
 	}
+}
 }
 printf("\nNumber %d added Successfully\n\n", num);
 }
@@ -84,17 +103,38 @@ __bst_inorder_traversal(t->right);
 
 void bst_inorder_traversal()
 {
+if(!bst_root)
+{
+printf("\n\nNo data found !\n\n");
+return;
+}
+printf("\nInorder Traversal with recursion: ");
 __bst_inorder_traversal(bst_root);
+printf("\n\n");
 }
 
 void bst_preorder_traversal()
 {
+if(!bst_root)
+{
+printf("\n\nNo data found !\n\n");
+return;
+}
+printf("\nPreorder Traversal with recursion: ");
 //__bst_preorder_traversal(bst_root);
+printf("\n\n");
 }
 
 void bst_postorder_traversal()
 {
+if(!bst_root)
+{
+printf("\n\nNo data found !\n\n");
+return;
+}
+printf("\nInorder Traversal with recursion: ");
 //__bst_postorder_traversal(bst_root);
+printf("\n\n");
 }
 
 int main()
