@@ -227,6 +227,15 @@ return stack_top==NULL;
 
 void bst_preorder_traversal_no_reccursion()
 {
+struct bst_node *t;
+push(bst_root);
+while(!isEmpty())
+{
+t=pop();
+printf("%d ", t->num);
+if(t->right) push(t->right);
+if(t->left) push(t->left);
+}
 }
 
 void bst_postorder_traversal_no_reccursion()
