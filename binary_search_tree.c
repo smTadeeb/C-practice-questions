@@ -91,15 +91,6 @@ void remove_from_bst(int num)
 {
 }
 
-void __bst_inorder_traversal(struct bst_node *root)
-{
-struct bst_node *t;
-t=root;
-if(t == NULL) return;
-__bst_inorder_traversal(t->left);
-printf("%d ", t->num);
-__bst_inorder_traversal(t->right);
-}
 
 void bst_inorder_traversal()
 {
@@ -113,6 +104,16 @@ __bst_inorder_traversal(bst_root);
 printf("\n\n");
 }
 
+void __bst_inorder_traversal(struct bst_node *root)
+{
+struct bst_node *t;
+t=root;
+if(t == NULL) return;
+__bst_inorder_traversal(t->left);
+printf("%d ", t->num);
+__bst_inorder_traversal(t->right);
+}
+
 void bst_preorder_traversal()
 {
 if(!bst_root)
@@ -121,8 +122,18 @@ printf("\n\nNo data found !\n\n");
 return;
 }
 printf("\nPreorder Traversal with recursion: ");
-//__bst_preorder_traversal(bst_root);
+__bst_preorder_traversal(bst_root);
 printf("\n\n");
+}
+
+void __bst_preorder_traversal(struct bst_node *root)
+{
+struct bst_node *t;
+t=root;
+if(t == NULL) return;
+printf("%d ", t->num);
+__bst_preorder_traversal(t->left);
+__bst_preorder_traversal(t->right);
 }
 
 void bst_postorder_traversal()
@@ -132,9 +143,19 @@ if(!bst_root)
 printf("\n\nNo data found !\n\n");
 return;
 }
-printf("\nInorder Traversal with recursion: ");
-//__bst_postorder_traversal(bst_root);
+printf("\nPostorder Traversal with recursion: ");
+__bst_postorder_traversal(bst_root);
 printf("\n\n");
+}
+
+void __bst_postorder_traversal(struct bst_node *root)
+{
+struct bst_node *t;
+t=root;
+if(t == NULL) return;
+__bst_postorder_traversal(t->left);
+__bst_postorder_traversal(t->right);
+printf("%d ", t->num);
 }
 
 int main()
