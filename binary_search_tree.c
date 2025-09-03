@@ -3,6 +3,7 @@
 
 struct bst_node;
 struct stack_node;
+struct queue_node;
 
 void add_to_bst(int );
 void remove_from_bst(int );
@@ -20,13 +21,15 @@ struct bst_node * pop();
 int isEmpty();
 void bst_clear();
 void __bst_clear(struct bst_node *);
+void level_order_traversal();
+void add_to_queue(struct bst_node *);
+struct bst_node * remove_from_the_queue();
 
 struct bst_node
 {
 int num;
 struct bst_node *left, *right;
 };
-
 struct bst_node *bst_root;
 
 struct stack_node
@@ -34,8 +37,15 @@ struct stack_node
 struct bst_node *addr;
 struct stack_node *next;
 };
-
 struct stack_node *stack_top;
+
+struct queue_node
+{
+struct bst_node *addr;
+struct queue_node *next;
+};
+struct queue_node *queue_front;
+struct queue_node *queue_rear;
 
 void add_to_bst(int num)
 {
@@ -263,11 +273,60 @@ __bst_clear(t->right);
 free(t);
 }
 
+void level_order_traversal()
+{
+int kitne_add_kare, ab_kitne_hai, n;
+struct bst_node *t;
+add_to_queue(bst_root);
+kitne_add_kare=1;
+while(queue_front)
+{
+ab_kitne_hai=0;
+n=1;
+while(n <= kitne_add_kare)
+{
+t=remove_from_the_queue();
+printf("%d ", t->num);
+if(t->left) add_to_queue(t->left);
+ab_kitne_hai++;
+if(t->right) add_to_queue(t->right);
+ab_kitne_hai++;
+n++;
+}
+kitne_add_kare = ab_kitne_hai;
+}
+}
+
+void add_to_queue(struct bst_node *addr)
+{
+struct queue_node *t;
+t=(struct queue_node *)malloc(sizeof(struct queue_node));
+t->addr = addr;
+t->next=NULL;
+
+if(!queue_front)
+{
+queue_front=t;
+queue_rear=t;
+return;
+}
+queue_rear->next = t;
+queue_rear = t;
+}
+
+struct bst_node * remove_from_the_queue()
+{
+struct bst_node *t;
+return t;
+}
+
 int main()
 {
 int ch , num;
 bst_root = NULL;
 stack_top = NULL;
+queue_front = NULL;
+queue_rear=NULL;
 while(1)
 {
 printf("\n1. Add Node/data");
@@ -278,8 +337,9 @@ printf("\n5. Postorder traversal with Reccursion");
 printf("\n6. Inorder traversal without Reccursion");
 printf("\n7. Preorder traversal without Reccursion");
 printf("\n8. Postorder traversal without Reccursion");
-printf("\n9. Clear the Tree");
-printf("\n10. Exit");
+printf("\n9. Level Order Traversal");
+printf("\n10. Clear the Tree");
+printf("\n11. Exit");
 
 printf("\nEnter your choice: ");
 scanf("%d", &ch);
@@ -343,9 +403,18 @@ printf("\n\n");
 }
 else if(ch==9)
 {
-bst_clear();
+if(!bst_root) 
+{
+printf("\n\nNo Data found in the BST\n\n");
+continue;
+}
+level_order_traversal();
 }
 else if(ch==10)
+{
+bst_clear();
+}
+else if(ch==11)
 {
 break;
 }
