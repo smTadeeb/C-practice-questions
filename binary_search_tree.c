@@ -24,6 +24,7 @@ void __bst_clear(struct bst_node *);
 void level_order_traversal();
 void add_to_queue(struct bst_node *);
 struct bst_node * remove_from_the_queue();
+int is_queue_empty();
 
 struct bst_node
 {
@@ -200,7 +201,7 @@ while(!isEmpty())
 t = pop();
 printf("%d ", t->num);
 j=t->right;
-if(j)
+while(j)
 {
 push(j);
 j=j->left;
@@ -279,7 +280,7 @@ int kitne_add_kare, ab_kitne_hai, n;
 struct bst_node *t;
 add_to_queue(bst_root);
 kitne_add_kare=1;
-while(queue_front)
+while(!is_queue_empty())
 {
 ab_kitne_hai=0;
 n=1;
@@ -295,6 +296,11 @@ n++;
 }
 kitne_add_kare = ab_kitne_hai;
 }
+}
+
+int is_queue_empty()
+{
+return queue_front==NULL;
 }
 
 void add_to_queue(struct bst_node *addr)
@@ -317,6 +323,13 @@ queue_rear = t;
 struct bst_node * remove_from_the_queue()
 {
 struct bst_node *t;
+struct queue_node *j;
+if(queue_front==NULL) return NULL;
+j=queue_front;
+t=queue_front->addr;
+queue_front= queue_front->next;
+if(queue_front==NULL) queue_rear = NULL;
+free(j);
 return t;
 }
 
