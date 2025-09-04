@@ -26,6 +26,7 @@ void level_order_traversal();
 void add_to_queue(struct bst_node *);
 struct bst_node * remove_from_the_queue();
 int is_queue_empty();
+int get_tree_height(struct bst_node *);
 
 struct bst_node
 {
@@ -460,6 +461,17 @@ free(j);
 return t;
 }
 
+int get_tree_height(struct bst_node *t)
+{
+int left_height, right_height;
+if(t==NULL) return 0;
+left_height = get_tree_height(t->left);
+right_height = get_tree_height(t->right);
+
+if(left_height > right_height) return left_height+1;
+else return right_height+1; 
+}
+
 int main()
 {
 int ch , num;
@@ -478,8 +490,9 @@ printf("\n6. Inorder traversal without Recursion");
 printf("\n7. Preorder traversal without Recursion");
 printf("\n8. Postorder traversal without Recursion");
 printf("\n9. Level Order Traversal");
-printf("\n10. Clear the Tree");
-printf("\n11. Exit");
+printf("\n10. Get height of the Tree");
+printf("\n11. Clear the Tree");
+printf("\n12. Exit");
 
 printf("\nEnter your choice: ");
 scanf("%d", &ch);
@@ -557,9 +570,13 @@ level_order_traversal();
 }
 else if(ch==10)
 {
-bst_clear();
+printf("\n\nThe height of the tree is %d\n\n", get_tree_height(bst_root));
 }
 else if(ch==11)
+{
+bst_clear();
+}
+else if(ch==12)
 {
 break;
 }
