@@ -468,8 +468,7 @@ if(t==NULL) return 0;
 left_height = get_tree_height(t->left);
 right_height = get_tree_height(t->right);
 
-if(left_height > right_height) return left_height+1;
-else return right_height+1; 
+return (left_height > right_height) ? left_height+1 : right_height+1; 
 }
 
 int main()
