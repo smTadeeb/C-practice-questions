@@ -147,6 +147,7 @@ if(!t->right && !t->left)   // if t (node to be deleted) is the leaf node
 {
 *h=NULL;
 free(t);
+printf("\n%d data-node is removed\n\n", num);
 return;
 }
 
@@ -174,6 +175,7 @@ z->right=t->right;
 //free(t);
 }
 free(t);  //Common line we took out.
+printf("\n%d data-node is removed\n\n", num);
 
 
 }          // right branch exists part END's here.
@@ -200,8 +202,8 @@ z->right=t->right;
 *h=z;
 //free(t);
 }
-free(t);  //Common line we took out.
-
+free(t);  //Common line from above if-else blocks we took out.
+printf("\n%d data-node is removed\n\n", num);
 
 }       // Left branch part END's here.
 
