@@ -321,10 +321,16 @@ while(n <= kitne_add_kare)
 {
 t=remove_from_the_queue();
 printf("%d ", t->num);
-if(t->left) add_to_queue(t->left);
+if(t->left) 
+{
+add_to_queue(t->left);
 ab_kitne_hai++;
-if(t->right) add_to_queue(t->right);
+}
+if(t->right) 
+{
+add_to_queue(t->right);
 ab_kitne_hai++;
+}
 n++;
 }
 kitne_add_kare = ab_kitne_hai;
