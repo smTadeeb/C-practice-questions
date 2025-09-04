@@ -119,6 +119,92 @@ printf("\nNumber %d added Successfully\n\n", num);
 
 void remove_from_bst(int num)
 {
+struct bst_node *t, *j, *z, *y;
+struct bst_node **h;
+
+//Searching the node to delete
+t=bst_root;
+while(t)
+{
+if(t->num == num) break;
+j=t;                            // t aage jaane se Pehle apna address j ko dejaye
+if(num > t->num) t = t->right;
+else t= t->left;
+}
+
+if(!t) // If no matching data found, inform and end the function.
+{
+printf("\n\n%d not found in the BST, Nothing deleted !\n\n", num);
+return;
+}
+
+//Avoiding messy conditions later.
+if(t==bst_root) 	h=&bst_root;
+else if(t==j->left)     h=&j->left;
+else if(t==j->right)    h=&j->right;
+
+if(!t->right && !t->left)   // if t (node to be deleted) is the leaf node
+{
+*h=NULL;
+free(t);
+return;
+}
+
+if(t->right)  // if t is not leaf node, and t has right  
+{
+z=t->right;       // right branch exists part START'S here.
+while(z->left)  // finding the successor.
+{
+y=z;    // z aage jaane se Pehle apna address y ko dejaye
+z=z->left;
+}
+
+if(z==t->right) // t's right is the successor only. (t ka right hi successor ho toh, yani uppar wala loop mai nhi phasa)
+{
+z->left=t->left;
+*h=z;
+//free(t);
+}
+else          // t(jisko delete karna hai) ke right ka extreme left successor hai.
+{
+y->left=z->right;
+z->left=t->left;
+z->right=t->right;
+*h=z;
+//free(t);
+}
+free(t);  //Common line we took out.
+
+
+}          // right branch exists part END's here.
+else
+{
+z=t->left;       // **Left branch** exists part START'S here. Here we can copy code of above if block and just change right to left and left to right.
+while(z->right)  // finding the successor.
+{
+y=z;                 // z aage jaane se Pehle apna address y ko dejaye
+z=z->right;
+}
+
+if(z==t->left) // t's left is the successor only. (t ka left hi successor ho toh, yani uppar wala loop mai nhi phasa)
+{
+z->right=t->right;
+*h=z;
+//free(t);
+}
+else          // t(jisko delete karna hai) ke left ka extreme right successor hai.
+{
+y->right=z->left;
+z->left=t->left;
+z->right=t->right;
+*h=z;
+//free(t);
+}
+free(t);  //Common line we took out.
+
+
+}       // Left branch part END's here.
+
 }
 
 
@@ -404,6 +490,11 @@ add_to_bst(num);
 }
 else if(ch==2)
 {
+if(!bst_root) 
+{
+printf("\n\nNo data found in BST\n");
+continue;
+}
 printf("\n\nEnter a number to remove: ");
 scanf("%d",&num);
 remove_from_bst(num);
