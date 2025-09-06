@@ -123,16 +123,30 @@ balance_it();
 void balance_it()
 {
 int lth, rth, diff;
-struct bst_node *p;
+struct bst_node *p, *parent, *aa, *bb;
+struct bst_node **p2p;
 
 while(!isEmpty())
 {
 p=pop();
+if(isEmpty()) parent=NULL;      // These 2 statements we require as while balancing we must have parent info for rotations.
+else parent = element_at_top();  
 lth = get_tree_height(p->left);
 rth = get_tree_height(p->right);
 diff = lth-rth;
 if(diff<0) diff *= -1;
 if(diff<=1) continue;
+
+/*
+A very important trict to 
+Avoiding messy conditions later. Just visualise p can be to the right of parent
+It can be to the left of parent node.
+or maybe there is no parent. so bst_root would get changed when rotation will occur.
+*/
+if(parent==NULL) p2p=&bst_root;
+else if(parent->left == p) p2p=&parent->left;
+else if(parent->right == p) p2p=&parent->right;
+
 
 // control comes here, it means balacning required. but which side ?
 if(rth>lth) // so balancing required in right side tree.
@@ -142,14 +156,38 @@ if(rth>lth) // so balancing required in right side tree.
 if(get_tree_height(p->right->left)>get_tree_height(p->right->right))  
 {
 // this case "right is left heavy". Requires Double rotation, 1st here we will make it right is right heavy
-
+aa=p->right;
+bb=aa->left;
+aa->left=bb->right;
+bb->right=aa;
+p->right=bb;
+// NOw the state is right is right heavy
 }
 
 // control comes here means "Right is Right heavy" One rotation here) 
+aa=p->right;
+p->right = aa->left;
+aa->left=p;
+*p2p=aa;
 
 }
 else  // so balancing required in left side tree.
 {
+
+if(get_tree_height(p->left->right) > get_tree_height(p->left->left)) //left is right heavy
+{
+aa=p->left;
+bb=aa->right;
+aa->right=bb->left;
+bb->left=aa;
+p->left=bb;
+// Now the state is left is left heavy.
+}
+// control comes here means "left is left heavy" One rotation here) 
+aa=p->left;
+p->left=aa->right;
+aa->right=p;
+*p2p=aa;
 
 }
 }
@@ -518,6 +556,7 @@ queue_front = NULL;
 queue_rear = NULL;
 while(1)
 {
+printf("\n\n          AVL Tree (Self Balancing Tree)             \n\n");
 printf("\n1. Add Node/data");
 printf("\n2. Remove Node/data");
 printf("\n3. Inorder traversal with Recursion");

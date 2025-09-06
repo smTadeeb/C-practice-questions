@@ -480,6 +480,7 @@ queue_front = NULL;
 queue_rear = NULL;
 while(1)
 {
+printf("\n\n          BST Tree (Binary Search Tree)             \n\n");
 printf("\n1. Add Node/data");
 printf("\n2. Remove Node/data");
 printf("\n3. Inorder traversal with Recursion");
