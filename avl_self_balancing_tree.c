@@ -122,6 +122,37 @@ balance_it();
 
 void balance_it()
 {
+int lth, rth, diff;
+struct bst_node *p;
+
+while(!isEmpty())
+{
+p=pop();
+lth = get_tree_height(p->left);
+rth = get_tree_height(p->right);
+diff = lth-rth;
+if(diff<0) diff *= -1;
+if(diff<=1) continue;
+
+// control comes here, it means balacning required. but which side ?
+if(rth>lth) // so balancing required in right side tree.
+{
+// now, control comes here so balancing required in right side tree of context-root.(different parents which comes from stack while popping)
+// now we need to determine, which case it is. right is right heavy OR right is left heavy.
+if(get_tree_height(p->right->left)>get_tree_height(p->right->right))  
+{
+// this case "right is left heavy". Requires Double rotation, 1st here we will make it right is right heavy
+
+}
+
+// control comes here means "Right is Right heavy" One rotation here) 
+
+}
+else  // so balancing required in left side tree.
+{
+
+}
+}
 
 }
 
