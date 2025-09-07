@@ -205,12 +205,18 @@ while(t)
 {
 if(t->num == num) break;
 j=t;                            // t aage jaane se Pehle apna address j ko dejaye
+push(j);  // pushing all the bst_node addresses on stack from which we are passing so that we can backtrack while balancing later.
 if(num > t->num) t = t->right;
 else t= t->left;
 }
 
 if(!t) // If no matching data found, inform and end the function.
 {
+/* if control comes here means, we didnt found the number to delete, 
+hence no node will be removed. But in this we must clear the space taken by stack nodes.
+Otherwise a memory leak will happen because this function is ending but the program will still be running.
+*/
+while(!isEmpty()) pop();  // we already have free stack_node logic in pop function.
 printf("\n\n%d not found in the BST, Nothing deleted !\n\n", num);
 return;
 }
@@ -225,6 +231,7 @@ if(!t->right && !t->left)   // if t (node to be deleted) is the leaf node
 *h=NULL;
 free(t);
 printf("\n%d data-node is removed\n\n", num);
+balance_it(); // In leaf node case we will check balance-factor for all the bst_node addresses pushed on stack.
 return;
 }
 
@@ -234,6 +241,16 @@ z=t->right;       // right branch exists part START'S here.
 while(z->left)  // finding the successor.
 {
 y=z;    // z aage jaane se Pehle apna address y ko dejaye
+z=z->left;
+}
+push(z); //We must 1st just push the extreme left node address on stack 1st. Theory is in notes.
+
+z=t->right;      // Now again i need to push all the bst-node address till extreme left
+while(z->left)  
+{
+//push(z); //This is also correct. In this case we wont be using push(y). 
+y=z;    
+push(y); // pushing all the bst node addresses *till* extreme left. 
 z=z->left;
 }
 
@@ -258,10 +275,23 @@ printf("\n%d data-node is removed\n\n", num);
 }          // right branch exists part END's here.
 else
 {
+/*
 z=t->left;       // **Left branch** exists part START'S here. Here we can copy code of above if block and just change right to left and left to right.
 while(z->right)  // finding the successor.
 {
 y=z;                 // z aage jaane se Pehle apna address y ko dejaye
+z=z->right;
+}
+push(z);
+*/
+
+for(z=t->left;z->right; z=z->right) push(z);  // This is also correct way, or we can use the while loop construct as above.
+
+z=t->left;       // **Left branch** exists part START'S here. Here we can copy code of above if block and just change right to left and left to right.
+while(z->right)  // finding the successor.
+{
+y=z;                 // z aage jaane se Pehle apna address y ko dejaye
+push(y);  // pushing all the bst node addresses *till* extreme right. 
 z=z->right;
 }
 
@@ -284,6 +314,7 @@ printf("\n%d data-node is removed\n\n", num);
 
 }       // Left branch part END's here.
 
+balance_it(); //now caling to balance, once all the proper bst node addresses went in stack.
 }
 
 
