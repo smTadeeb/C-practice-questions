@@ -10,7 +10,7 @@ A collection of problems and projects solved using pure C, written manually in a
 - **Concept Mastery:** Deep understanding of pointers, memory, and algorithms
 
 ## 📁 Structure
-I have not followed any directory structure, just directly the files are available with proper names.
+All the cpp-questions are in cpp folder
 
 
 ## 🛠️ Skills Demonstrated
