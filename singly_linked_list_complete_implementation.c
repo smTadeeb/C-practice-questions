@@ -53,7 +53,7 @@ printf("\n 4. Remove node");
 printf("\n 5. Traverse Top to bottom");
 printf("\n 6. Traverse bottom to top using stack");
 printf("\n 7. Traverse bottom to top using recursion");
-
+printf("\n 8. Exit");
 
 printf("\nEnter you choice: ");
 scanf("%d", &ch);
@@ -102,6 +102,10 @@ traverse_bottom_to_top_using_stack();
 else if(ch==7)
 {
 traverse_bottom_to_top_using_recursion(start);
+}
+else if(ch==8)
+{
+break;
 }
 else
 {
