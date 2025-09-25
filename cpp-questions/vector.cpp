@@ -60,5 +60,49 @@ cout<<" "<<x;
 }
 cout<<endl<<endl;
 
+// vector<int> v4=(3,100);   // <-- this is wrong way 
+// vector<int> v1(3,100);   // <-- this is also wrong, redeclaration cant be done in CPP, yes we can do v1={100,100,100} <-- this is allowed as this is reassignment not redeclaration
+
+vector<int> v4(3,100);
+cout<<endl<<"The elements in v4 objects vector(array) are: ";
+for(int x : v4)
+{
+cout<<" "<<x;
+}
+cout<<endl<<endl;
+
+vector<int>::iterator it;  // here it objects ptr is NULL
+it=v4.begin(); //initialised it objects ptr
+v4.insert(it,200);
+cout<<endl<<"The elements in v4 objects vector(array) after .insert(it,200) are: ";
+for(int x : v4)
+{
+cout<<" "<<x;
+}
+cout<<endl<<endl;
+
+cout<<endl<<"*it basically *ptr of it object (but now it's ptr is still pointing to old location, thats why garbage value for *it): "<<*it<<endl;
+it=v4.begin();
+cout<<endl;
+cout<<"*it basically *ptr of it object: (new location after copy,shift internal operations): "<<*it<<endl<<endl;
+v4.insert(it,2,300);
+cout<<endl<<"The elements in v4 objects vector(array) after .insert(it,2,300) are: ";
+for(int x : v4)
+{
+cout<<" "<<x;
+}
+cout<<endl<<endl;
+cout<<endl<<" *it basically *ptr"<<*it<<endl;
+
+it=v4.begin(); //re-assigning the value to it 's  ptr because the ptr of it has jumped 2 positions because of above operation v4.insert(it,2,300);
+vector<int> v5(2,11);
+v4.insert(it,v5.begin(),v5.end()-1);
+cout<<endl<<"The elements in v4 objects vector(array) after .insert(it,v5.begin(),v5.end()-1) are: ";
+for(int x : v4)
+{
+cout<<" "<<x;
+}
+cout<<endl<<endl;
+
 return 0;
 }
