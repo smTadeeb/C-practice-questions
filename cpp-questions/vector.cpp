@@ -6,7 +6,11 @@ int main()
 {
 
 vector<int> v1;
-cout<<"Size of vector object v1: "<<sizeof(v1)<<endl; // This is giving size of vector object not vector array.
+cout<<"size of vector object v1 itself is: "<<sizeof(v1)<<endl; // This is giving size of vector object not vector array.
+cout<<"size of v1 objects vector is: "<<v1.size()<<endl; 
+cout<<"capacity of v1 objects vector is: "<<v1.capacity()<<endl;
+cout<<"max_size of v1 objects vector is: "<<v1.max_size()<<endl;
+
 v1={1,2,3}; // v1.=({1,2,3}) operator overloading will run here. and accordingly size of vector array for v1 object will be allocated in heap region.
 
 cout<<endl<<"The elements in v1 objects vector(array) will be: ";
@@ -14,6 +18,8 @@ for(int x : v1)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v1 objects vector is: "<<v1.size();
+cout<<endl<<"capacity of v1 objects vector is: "<<v1.capacity();
 cout<<endl<<endl;
 
 vector<int> v2 = {10,20,30,40}; //here vector<int> v2({10,20,30,40});  <-- this parameterized constructor will run and make v2 objects vector as {10,20,30,40} 
@@ -22,6 +28,8 @@ for(int x : v2)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v2 objects vector is: "<<v2.size();
+cout<<endl<<"capacity of v2 objects vector is: "<<v2.capacity();
 cout<<endl<<endl;
 
 v1.assign(5,8);
@@ -30,6 +38,8 @@ for(int x : v1)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v1 objects vector after .assign(5,8) is: "<<v1.size();
+cout<<endl<<"capacity of v1 objects vector after .assign(5,8) is: "<<v1.capacity();
 cout<<endl<<endl;
 
 int arr[4] = {11,22,33,44};
@@ -40,6 +50,8 @@ for(int x : v1)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v1 objects vector after .assign(arr,arr+3) is: "<<v1.size();
+cout<<endl<<"capacity of v1 objects vector after .assign(arr,arr+3) is: "<<v1.capacity();
 cout<<endl<<endl;
 
 v1.push_back(1001);
@@ -50,6 +62,8 @@ for(int x : v1)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v1 objects vector after 3 .push_back() is: "<<v1.size();
+cout<<endl<<"capacity of v1 objects vector after 3 .push_back() is: "<<v1.capacity();
 cout<<endl<<endl;
 
 v1.pop_back();
@@ -58,6 +72,8 @@ for(int x : v1)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"But the size of v1 objects vector(array) after 1 .pop_back() will still be: "<<v1.size();
+cout<<endl<<"But the capacity of v1 objects vector(array) after 1 .pop_back() will still be: "<<v1.capacity();
 cout<<endl<<endl;
 
 // vector<int> v4=(3,100);   // <-- this is wrong way 
@@ -69,6 +85,8 @@ for(int x : v4)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v4 objects vector is: "<<v4.size();
+cout<<endl<<"capacity of v4 objects vector is: "<<v4.capacity();
 cout<<endl<<endl;
 
 vector<int>::iterator it;  // here it objects ptr is NULL
@@ -79,6 +97,8 @@ for(int x : v4)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v4 objects vector after .insert(it,200) is: "<<v4.size();
+cout<<endl<<"capacity of v4 objects vector after .insert(it,200) is: "<<v4.capacity();
 cout<<endl<<endl;
 
 cout<<endl<<"*it basically *ptr of it object (but now it's ptr is still pointing to old location, thats why garbage value for *it): "<<*it<<endl;
@@ -91,6 +111,8 @@ for(int x : v4)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v4 objects vector after .insert(it,2,300) is: "<<v4.size();
+cout<<endl<<"capacity of v4 objects vector after .insert(it,2,300) is: "<<v4.capacity();
 cout<<endl<<endl;
 cout<<endl<<" *it basically *ptr"<<*it<<endl;
 
@@ -102,6 +124,8 @@ for(int x : v4)
 {
 cout<<" "<<x;
 }
+cout<<endl<<"size of v4 objects vector after .insert(it,v5.begin(),v5.end()-1) is: "<<v4.size();
+cout<<endl<<"capacity of v4 objects vector after .insert(it,v5.begin(),v5.end()-1) is: "<<v4.capacity();
 cout<<endl<<endl;
 
 return 0;
